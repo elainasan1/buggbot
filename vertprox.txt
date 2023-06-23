@@ -1803,10 +1803,6 @@ end
 if varlist[0] == "OnConsoleMessage" and varlist[1]:find("Collected") and (varlist[1]:find("Blue Gem Lock") or varlist[1]:find("World Lock") or varlist[1]:find("Diamond Lock")) then
 CheckLocks()
  end
-	 if varlist[0]:find("OnDialogRequest") and varlist[1]:find("You have") and varlist[1]:find("Blue Gem Lock") then
-	return true
-	end
- 
 	if varlist[0]:find("OnSDBroadcast") then
 	return true
 	end
