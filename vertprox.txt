@@ -18,9 +18,8 @@ pc = false
 local lastfakespin = "NONE"
 telex,teley = -1,-1
 local shownamespin = true
-local SB_COUNT = 0 -- Do not touch
-local GEMS_USED = 0 -- Do not touch
-ssb = false
+
+
  
 function sl()
 h1x,h1y,h2x,h2y,h3x,h3y = 0,0,0,0,0,0
@@ -2027,116 +2026,6 @@ end
 end
 
 
-function visual_spin_2(type, packet)
-    if packet:find("action|input\n|text|/visualspin ") then
-        spin_nmber = packet:gsub("action|input\n|text|/visualspin ", "")
-          spin_nmber = tonumber(spin_nmber)
-          OnConsoleMessage("`0[ `3Mandq#3038 `0] `9Visual spin set to `3"..spin_nmber)
-          if spin_nmber == 0 then
-            color_visual_spin = 2
-          elseif spin_nmber == 1 then
-            color_visual_spin = 4
-          elseif spin_nmber == 2 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 3 then
-            color_visual_spin = 4
-          elseif spin_nmber == 4 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 5 then
-            color_visual_spin = 4
-          elseif spin_nmber == 6 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 7 then
-            color_visual_spin = 4
-          elseif spin_nmber == 8 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 9 then
-            color_visual_spin = 4
-          elseif spin_nmber == 10 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 11 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 12 then
-            color_visual_spin = 4
-          elseif spin_nmber == 13 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 14 then
-            color_visual_spin = 4
-          elseif spin_nmber == 15 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 16 then
-            color_visual_spin = 4
-          elseif spin_nmber == 17 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 18 then
-            color_visual_spin = 4
-          elseif spin_nmber == 19 then
-            color_visual_spin = 4
-          elseif spin_nmber == 20 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 21 then
-            color_visual_spin = 4
-          elseif spin_nmber == 22 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 23 then
-            color_visual_spin = 4
-          elseif spin_nmber == 24 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 25 then
-            color_visual_spin = 4
-          elseif spin_nmber == 26 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 27 then
-            color_visual_spin = 4
-          elseif spin_nmber == 28 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 29 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 30 then
-            color_visual_spin = 4
-          elseif spin_nmber == 31 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 32 then
-            color_visual_spin = 4
-          elseif spin_nmber == 33 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 34 then
-            color_visual_spin = 4
-          elseif spin_nmber == 35 then
-            color_visual_spin = "b"
-          elseif spin_nmber == 36 then
-            color_visual_spin = 4
-          end
-  function Spin_checker(varlist)
-      if varlist[0] == "OnTalkBubble" and varlist[3] ~= -1 and varlist[2]:find("spun the wheel and got") then
-        text = ""
-        if varlist[2]:find("CP:") then
-          start, final = string.find(varlist[2], "=")
-          text = "`0[ `4FAKE `0] " .. string.sub(varlist[2], final + 1)
-        else
-          var = {}
-          var[0] = "OnTalkBubble"
-          var[1] = varlist[1]
-          var[2] = "`7[``"..GetLocal().name.."`` spun the wheel and got `"..color_visual_spin..""..spin_nmber.."``!`7]``"
-          var[3] = -1
-          var.netid = -1
-          SendVarlist(var)
-          return true
-        end
-        SendVarlist({
-          [0] = "OnTalkBubble",
-          [1] = varlist[1],
-          [2] = text,
-          [3] = -1,
-          netid = -1,
-        })
-        return true
-    end
-  end
-  AddCallback("Spin_checker", "OnVarlist", Spin_checker)
-  return true
-  end
-  end
 fake = false
 fakespinned = false
 	if vlist[0]:find("OnConsoleMessage") then
@@ -2248,7 +2137,6 @@ AddCallback("allspin","OnPacket", all_spin)
 AddCallback("qqspin","OnPacket", qq_spin)
 AddCallback("remespin","OnPacket", reme_spin)
 AddCallback("checkspin","OnPacket", check_spin)
-AddCallback("spinx_changer","OnPacket", visual_spin_2)
 AddCallback("packet", "OnPacket", com)
 AddCallback("Hook", "OnPacket", hook2)
 AddCallback("Detect", "OnVarlist", hook)
