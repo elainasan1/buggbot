@@ -2191,6 +2191,8 @@ end
 end
 fakespinned = false
 
+  
+
 
 end)
 url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493551390740/menubanners.rttex"
