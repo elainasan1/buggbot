@@ -96,6 +96,11 @@ var[1] = [[
 set_default_color|`o
 add_label_with_icon|big|`9Introvert Proxy````|left|32|
 add_image_button|banner|interface/large/menubanners.rttex|noflags|||
+add_textbox|Author Script|
+add_url_button|comment|`o Discord Channel |noflags|https://discord.gg/wvk64dxxE4|Introvert Community|18|
+add_textbox|`oPartner/Helper Script|left|32
+add_url_button|comment|`o Ret Script Community |noflags|https://discord.gg/pTeqmZQqRY|p\nq#7940|0|
+add_smalltext|`o~> `^Ey`o#3118|
 add_smalltext|`oCurrent World : `2]]..GetLocal().world..[[|left|
 add_smalltext|`o X : `2]]..math.floor(GetLocal().tile_x)..[[ `0x `oY : `2]]..math.floor(GetLocal().tile_y)..[[|left|
 add_smalltext|`oUser ID : `b]]..math.floor(GetLocal().userid)..[[ `0x `oNet ID : `2]]..math.floor(GetLocal().netid)..[[|left|
@@ -2080,9 +2085,6 @@ end
 end
 fakespinned = false
 
-  
-
-
 end)
 url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493551390740/menubanners.rttex"
  
@@ -2143,7 +2145,6 @@ AddCallback("Detect", "OnVarlist", hook)
 SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 l()
 menu()
-
 
 
 
