@@ -1851,7 +1851,7 @@ function setwarn(type, packet)
 
      
 function fc(type, packet)
-    if packet == ("action|input\n|text|/fc") then
+   if 2 == type and packet:find("/fc") then
         OnConsoleMessage("`0[ `3Introvert#7672 `0] `9Closing proxy.")
         RemoveCallbacks()
     return true
