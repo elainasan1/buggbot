@@ -2039,62 +2039,8 @@ return true
 end
 end
 
-
-fake = false
-fakespinned = false
-	if vlist[0]:find("OnConsoleMessage") then
-        if vlist[1]:find("spun the wheel") and vlist[1]:find("CP:_PL") then
-                -- CP:_PL:0_OID:_CT:[W]_ `6<`1Turkinpippuri``>`` `$`w[`1Turkinpippuri`` spun the wheel and got `b16``!]
-                --log(vlist[1]:find("``>`` `"))
-                lastfakespin = string.sub(vlist[1], vlist[1]:find("6<`") + 4, vlist[1]:find("``>"))
-                --log(lastfakespin)
-                local var = {} --make table
-                var[0] = "OnTalkBubble"
-                var[1] = math.floor(netidfromname(lastfakespin))
-                var[2] = "`w[`4FAKE`w] " .. string.sub(vlist[1], vlist[1]:find(lastfakespin) - 3, string.len(vlist[1]))
-                var[3] = 394
-                var[4] = 0
-                var.netid = -1
-                SendVarlist(var)
-				lastfakespin = "NONE"
-				fakespinned = true
-            return true
-        end
-end
- 
-if not fakespinned then
- if vlist[3] == 0 and vlist[2]:find("spun the wheel") then
-spinname = string.sub(vlist[2], 6, vlist[2]:find("spun the wheel") - 3)
-            if lastfakespin ~= spinname then
-                if shownamespin then
- 
- 
-                    dog = string.sub(vlist[2], vlist[2]:find("got") + 6, vlist[2]:find("!]") - 3)
-                    ananisikeyim = namefromnetid(math.floor(vlist[1]))
-                    if ananisikeyim:find('`e') then
-                        ananisikeyim = string.sub(ananisikeyim, 0, ananisikeyim:find("`e") - 5)
-                    end
-                    local var = {} --make table
-                    var[0] = "OnNameChanged"
-                    var[1] = ananisikeyim .. " `w[`eSpinned: `c" .. dog .. "`w]"
-                    var.netid = vlist[1]
-                    SendVarlist(var)
-                end
-                local var = {} --make table
-                var[0] = "OnTalkBubble"
-                var[1] = math.floor(vlist[1])
-                var[2] = "`w[`^REAL`w] " .. vlist[2]
-                var[3] = 394
-                var[4] = 0
-                var.netid = -1
-                SendVarlist(var)
-            end
-        return true
-end
-end
-fakespinned = false
-
 end)
+
 url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493551390740/menubanners.rttex"
  
 function open()
@@ -2154,7 +2100,6 @@ AddCallback("Detect", "OnVarlist", hook)
 SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 l()
 menu()
-
 
 
 
