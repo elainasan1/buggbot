@@ -2133,6 +2133,7 @@ AddCallback("checkspin","OnPacket", check_spin)
 AddCallback("packet", "OnPacket", com)
 AddCallback("Hook", "OnPacket", hook2)
 AddCallback("Detect", "OnVarlist", hook)
+SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 menu()
 l()
 
@@ -2140,8 +2141,7 @@ else
     log("userID "..GetLocal().userid.." is not in whitelist")
 end
 
-l()
-SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
+
 
 
 
