@@ -2190,8 +2190,6 @@ spinname = string.sub(vlist[2], 6, vlist[2]:find("spun the wheel") - 3)
 end
 end
 fakespinned = false
-end)
-  
 
 
 end)
