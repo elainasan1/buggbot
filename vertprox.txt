@@ -1817,6 +1817,16 @@ end
  
 AddCallback("onvariantlist", "OnVarlist", function(vlist)
 
+function fc(type, packet)
+    if packet == ("action|input\n|text|/fc") then
+        OnConsoleMessage("`0[ `3Introvert#7672 `0] `9Closing proxy.")
+        RemoveCallbacks()
+    return true
+    end
+end
+    
+AddCallback("fc","OnPacket", fc)
+
 function all_spin(type, packet)
     if packet == ("action|input\n|text|/spin all") then
         OnConsoleMessage("`0[ `3Introvert_7672 `0] `9Spin mode set to `3QQ & REME")
