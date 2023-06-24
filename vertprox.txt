@@ -429,6 +429,10 @@ tiles2 = {}
 local file = io.open("data.txt", "r")
  
 -- Read the data from the file
+
+local dataString = file:read("*all")
+-- Close the file
+file:close()
  
 
  
@@ -1817,11 +1821,13 @@ end
  
 AddCallback("onvariantlist", "OnVarlist", function(vlist)
 
-    if packet == ("action|input\n|text|/fc") then
+     
+if 2 == type and packet:find("/fc") then
         OnConsoleMessage("`0[ `3Introvert#7672 `0] `9Closing proxy.")
         RemoveCallbacks()
-    return true
-
+return true
+end
+  
 function all_spin(type, packet)
     if packet == ("action|input\n|text|/spin all") then
         OnConsoleMessage("`0[ `3Introvert_7672 `0] `9Spin mode set to `3QQ & REME")
@@ -2161,7 +2167,6 @@ AddCallback("Detect", "OnVarlist", hook)
 SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 l()
 menu()
-
 
 
 
