@@ -39,7 +39,6 @@ AddCallback("checkspin","OnPacket", check_spin)
 AddCallback("packet", "OnPacket", com)
 AddCallback("Hook", "OnPacket", hook2)
 AddCallback("Detect", "OnVarlist", hook)
-l()
 menu()
 
 else
@@ -2139,6 +2138,7 @@ else
 open2()
 end
 
+l()
 SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 
 
