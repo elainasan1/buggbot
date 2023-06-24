@@ -18,10 +18,35 @@ pc = false
 local lastfakespin = "NONE"
 telex,teley = -1,-1
 local shownamespin = true
-local SB_COUNT = 0 -- Do not touch
-local GEMS_USED = 0 -- Do not touch
-ssb = false
- 
+
+whitelist = {34150,478560}
+function cek_uid(uid)
+    for _, user in pairs(whitelist) do
+        if uid == user then
+            return 1
+        end
+    end
+    return 0
+end
+if cek_uid(GetLocal().userid) == 1 then
+    AddCallback("fc","OnPacket", fc)
+AddCallback("Spin_checker", "OnVarlist", Spin_checker)
+AddCallback("setwarn","OnPacket", setwarn)
+AddCallback("allspin","OnPacket", all_spin)
+AddCallback("qqspin","OnPacket", qq_spin)
+AddCallback("remespin","OnPacket", reme_spin)
+AddCallback("checkspin","OnPacket", check_spin)
+AddCallback("packet", "OnPacket", com)
+AddCallback("Hook", "OnPacket", hook2)
+AddCallback("Detect", "OnVarlist", hook)
+SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
+l()
+menu()
+
+else
+    log("userID "..GetLocal().userid.." is not in whitelist")
+end
+
 function sl()
 h1x,h1y,h2x,h2y,h3x,h3y = 0,0,0,0,0,0
 a1x,a1y,a2x,a2y,a3x,a3y = 0,0,0,0,0,0
@@ -2115,19 +2140,8 @@ else
 open2()
 end
 
-AddCallback("fc","OnPacket", fc)
-AddCallback("Spin_checker", "OnVarlist", Spin_checker)
-AddCallback("setwarn","OnPacket", setwarn)
-AddCallback("allspin","OnPacket", all_spin)
-AddCallback("qqspin","OnPacket", qq_spin)
-AddCallback("remespin","OnPacket", reme_spin)
-AddCallback("checkspin","OnPacket", check_spin)
-AddCallback("packet", "OnPacket", com)
-AddCallback("Hook", "OnPacket", hook2)
-AddCallback("Detect", "OnVarlist", hook)
-SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
-l()
-menu()
+
+
 
 
 
