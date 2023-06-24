@@ -2139,6 +2139,8 @@ else
 open2()
 end
 
+SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
+
 
 
 
