@@ -18,8 +18,9 @@ pc = false
 local lastfakespin = "NONE"
 telex,teley = -1,-1
 local shownamespin = true
-
-
+local SB_COUNT = 0 -- Do not touch
+local GEMS_USED = 0 -- Do not touch
+ssb = false
  
 function sl()
 h1x,h1y,h2x,h2y,h3x,h3y = 0,0,0,0,0,0
@@ -96,13 +97,6 @@ var[1] = [[
 set_default_color|`o
 add_label_with_icon|big|`9Introvert Proxy````|left|32|
 add_image_button|banner|interface/large/menubanners.rttex|noflags|||
-add_textbox|Author Script|
-add_url_button|comment|`o Introvert Community |noflags|https://discord.gg/wvk64dxxE4|Introvert Community|18|
-add_textbox|`oPartner/Helper Script|left|32
-add_url_button|comment|`o Ret Script Community |noflags|https://discord.gg/pTeqmZQqRY|p\nq#7940|0|
-add_smalltext|`o~> `^Ey`o#3118|
-add_smalltext|`o~> `^Introvert`o#7672|
-add_spacer|small|
 add_smalltext|`oCurrent World : `2]]..GetLocal().world..[[|left|
 add_smalltext|`o X : `2]]..math.floor(GetLocal().tile_x)..[[ `0x `oY : `2]]..math.floor(GetLocal().tile_y)..[[|left|
 add_smalltext|`oUser ID : `b]]..math.floor(GetLocal().userid)..[[ `0x `oNet ID : `2]]..math.floor(GetLocal().netid)..[[|left|
@@ -142,13 +136,6 @@ var[1] = [[
 set_default_color|`o
 add_label_with_icon|big|`9Introvert Proxy````|left|32|
 add_image_button|banner|interface/large/menubanners.rttex|noflags|||
-add_textbox|Author Script|
-add_url_button|comment|`o Introvert Community |noflags|https://discord.gg/wvk64dxxE4|Introvert Community|18|
-add_textbox|`oPartner/Helper Script|left|32
-add_url_button|comment|`o Ret Script Community |noflags|https://discord.gg/pTeqmZQqRY|p\nq#7940|0|
-add_smalltext|`o~> `^Ey`o#3118|
-add_smalltext|`o~> `^Introvert`o#7672|
-add_spacer|small|
 add_smalltext|`oCurrent World : `2]]..GetLocal().world..[[|left|
 add_smalltext|`o X : `2]]..math.floor(GetLocal().tile_x)..[[ `0x `oY : `2]]..math.floor(GetLocal().tile_y)..[[|left|
 add_smalltext|`oUser ID : `b]]..math.floor(GetLocal().userid)..[[ `0x `oNet ID : `2]]..math.floor(GetLocal().netid)..[[|left|
@@ -1846,7 +1833,7 @@ AddCallback("onvariantlist", "OnVarlist", function(vlist)
 
 
 function setwarn(type, packet)
-    if packet:find("action|input\n|text|/warn") then
+   if 2 == type and packet:find("/warn") then
         setwarn_text = packet:gsub("action|input\n|text|/warn", "")
             var2 = {}
             var2[0] = "OnAddNotification"
@@ -1874,7 +1861,7 @@ end
     
 
 function all_spin(type, packet)
-    if packet == ("action|input\n|text|/spin all") then
+   if 2 == type and packet:find("/spin all") then
         OnConsoleMessage("`0[ `3Introvert_7672 `0] `9Spin mode set to `3QQ & REME")
 
 function Spin_checker(varlist)
@@ -1917,7 +1904,7 @@ end
 
 
 function qq_spin(type, packet)
-    if packet == ("action|input\n|text|/spin qq") then
+   if 2 == type and packet:find("/spin qq") then
         OnConsoleMessage("`0[ `3Introvert_7672 `0] `9Spin mode set to `3QQ")
 function Spin_checker(varlist)
     if varlist[0] == "OnTalkBubble" and varlist[3] ~= -1 and varlist[2]:find("spun the wheel and got") then
@@ -1960,7 +1947,7 @@ end
 
 
 function reme_spin(type, packet)
-    if packet == ("action|input\n|text|/spin reme") then
+   if 2 == type and packet:find("/spin reme") then
         OnConsoleMessage("`0[ `3Introvert_7672 `0] `9Spin mode set to `3REME")
 function Spin_checker(varlist)
     if varlist[0] == "OnTalkBubble" and varlist[3] ~= -1 and varlist[2]:find("spun the wheel and got") then
@@ -1999,8 +1986,43 @@ return true
 end
 end
 
+function Spin_checker(varlist)
+    if varlist[0] == "OnTalkBubble" and varlist[3] ~= -1 and varlist[2]:find("spun the wheel and got") then
+      text = ""
+      if varlist[2]:find("CP:") then
+        start, final = string.find(varlist[2], "=")
+        text = "`0[ `4FAKE `0] " .. string.sub(varlist[2], final + 1)
+      else
+        x = varlist[2]:removeColors()
+        x2 = x:match("spun the wheel and got (%d+)")
+        x2 = tonumber(x2)
+        qq_mode = qq_function(x2)
+        reme_mode2 = reme_function(x2)
+        reme_mode = qq_function(reme_mode2)
+        var = {}
+        var[0] = "OnTalkBubble"
+        var[1] = varlist[1]
+        var[2] = "`0[ `2REAL `0] "..varlist[2]
+        var[3] = -1
+        var.netid = -1
+        SendVarlist(var)
+        return true
+      end
+      SendVarlist({
+        [0] = "OnTalkBubble",
+        [1] = varlist[1],
+        [2] = text,
+        [3] = -1,
+        netid = -1,
+      })
+      return true
+    end
+  end
+
+
+
 function check_spin(type, packet)
-    if packet == ("action|input\n|text|/spin check") then
+   if 2 == type and packet:find("/spin check") then
         OnConsoleMessage("`0[ `3Mandq#3038 `0] `9Spin mode set to `3Checker")
 function Spin_checker(varlist)
     if varlist[0] == "OnTalkBubble" and varlist[3] ~= -1 and varlist[2]:find("spun the wheel and got") then
@@ -2039,8 +2061,13 @@ return true
 end
 end
 
-end)
 
+
+  
+  
+
+
+end)
 url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493551390740/menubanners.rttex"
  
 function open()
@@ -2089,6 +2116,7 @@ open2()
 end
 
 AddCallback("fc","OnPacket", fc)
+AddCallback("Spin_checker", "OnVarlist", Spin_checker)
 AddCallback("setwarn","OnPacket", setwarn)
 AddCallback("allspin","OnPacket", all_spin)
 AddCallback("qqspin","OnPacket", qq_spin)
@@ -2100,6 +2128,8 @@ AddCallback("Detect", "OnVarlist", hook)
 SendPacket(2, "action|input\ntext|`9Proxy by `2Introvert#7672")
 l()
 menu()
+
+
 
 
 
